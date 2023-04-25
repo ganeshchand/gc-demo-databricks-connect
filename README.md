@@ -7,9 +7,14 @@
 * Python version (minor version must match between the cluster and your local environment)
 * The Databricks Connect major and minor package version should match your Databricks Runtime version. 
 
-## Best Practice and Recomendation
+## Best Practice, Tips and Recomendation
 * Use Python Virtual Environment (venv or conda). I prefer conda. See comparision [here](https://www.linkedin.com/pulse/why-you-should-configure-python-virtual-environments-conda-helmuth?trk=pulse-article_more-articles_related-content-card#:~:text=in%20your%20browser.-,Conda,package%20manager%20onto%20your%20computer)
 * Existing pyspark on your local machine will conflict with Databricks Connect pyspark. You must uninstall before you install databricks connect.
+* For verbose logging and debugging databricks connect issues, 
+  
+  ```bash
+  export SPARK_CONNECT_LOG_LEVEL=debug
+  ```
 
 
 ## Steps:
@@ -80,7 +85,8 @@ spark = DatabricksSession.builder.sdkConfig(config).getOrCreate()
 
 ```
 
-* Step 5 - Set the environment variable
+* Step 5 (optional) - Set the environment variable
+You only need to do this if you don't use the configuration profile or you want to use the pyspark console for remote execution.
 
 ```bash
 export SPARK_REMOTE="sc://<WORKSPACE_URL>:443/;token=<TOKEN>;x-databricks-cluster-id=<CLUSTER_ID>"
@@ -159,7 +165,8 @@ Debugging
 For VS Code specific Python code debuging insgtructions, see [here](https://code.visualstudio.com/docs/python/python-tutorial#_configure-and-run-the-debugger)
 
 ## Resources
-
+[Databricks Connect V2 documentation](https://docs.databricks.com/dev-tools/databricks-connect.html#databricks-connect
+)
 [Databricks Connect V2 Release Notes](https://docs.databricks.com/release-notes/dbconnect/index.html)
 
 [How to get connection details for your Databricks cluster](https://docs.databricks.com/integrations/jdbc-odbc-bi.html#get-connection-details-for-a-cluster)
@@ -170,3 +177,5 @@ For VS Code specific Python code debuging insgtructions, see [here](https://code
 
 
 [Migrating to the latest Databricks Connect](https://docs.databricks.com/dev-tools/databricks-connect.html#migrate-to-the-latest-databricks-connect)
+
+[databricks python sdk](https://pypi.org/project/databricks-sdk/)
